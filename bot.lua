@@ -33,7 +33,7 @@ function get_bot (i, naji)
 end
 function reload(chat_id,msg_id)
 	loadfile("./bot-BOT-ID.lua")()
-	send(chat_id, msg_id, "<i>SuccessfulLy Done.</i>")
+	send(chat_id, msg_id, "<i>Successfully Done.</i>")
 end
 function is_naji(msg)
     local var = false
@@ -370,7 +370,7 @@ function tdcli_update_callback(data)
 					redis:sadd("botBOT-IDanswerslist", txt)
 					return send(msg.chat_id_, msg.id_, "<i>Answer for | </i>" .. tostring(txt) .. "<i> | set to :</i>\n" .. tostring(answer))
 				elseif text:match("^(!Del answer) (.*)") then
-					local matches = text:match("^Delete Answer (.*)")
+					local matches = text:match("^Del answer(.*)")
 					redis:hdel("botBOT-IDanswers", matches)
 					redis:srem("botBOT-IDanswerslist", matches)
 					return send(msg.chat_id_, msg.id_, "<i>Answer for | </i>" .. tostring(matches) .. "<i> | has been deleted from list.</i>")
@@ -404,7 +404,7 @@ function tdcli_update_callback(data)
 								end, {id=b})
 							end
 					end
-					return send(msg.chat_id_,msg.id_,"<i>Bot Reloadind </i><code> BOT-ID </code> SuccessfulLy Done!")
+					return send(msg.chat_id_,msg.id_,"<i>Bot Reloadind </i><code> BOT-ID </code> Successfully Done!")
 				elseif text:match("^(!Status)$") then
 					local s = redis:get("botBOT-IDmaxjoin") and redis:ttl("botBOT-IDmaxjoin") or 0
 					local ss = redis:get("botBOT-IDmaxlink") and redis:ttl("botBOT-IDmaxlink") or 0
@@ -473,7 +473,7 @@ function tdcli_update_callback(data)
 							from_background_ = 1
 						}, dl_cb, nil)
 					end
-					return send(msg.chat_id_, msg.id_, "<i>SuccessfulLy Sent!</i>")
+					return send(msg.chat_id_, msg.id_, "<i>Successfully Sent!</i>")
 				elseif text:match("^(!Send to sgp) (.*)") then
 					local matches = text:match("^!Send to sgp (.*)")
 					local dir = redis:smembers("botBOT-IDsupergroups")
@@ -495,7 +495,7 @@ function tdcli_update_callback(data)
 							},
 						}, dl_cb, nil)
 					end
-                    			return send(msg.chat_id_, msg.id_, "<i>SuccessfulLy Sent!</i>")
+                    			return send(msg.chat_id_, msg.id_, "<i>Successfully Sent!</i>")
 				elseif text:match("^(!Block) (%d+)$") then
 					local matches = text:match("%d+")
 					rem(tonumber(matches))
@@ -521,7 +521,7 @@ function tdcli_update_callback(data)
 						first_name_ = fname,
 						last_name_ = lname
 					}, dl_cb, nil)
-					return send(msg.chat_id_, msg.id_, "<i>New Name SuccessfulLy Set.</i>")
+					return send(msg.chat_id_, msg.id_, "<i>New Name Successfully Set.</i>")
 				elseif text:match("^(!Set username) (.*)") then
 					local matches = text:match("^!Set username (.*)")
 						tdcli_function ({
@@ -534,7 +534,7 @@ function tdcli_update_callback(data)
 						ID = "ChangeUsername",
 						username_ = ""
 					}, dl_cb, nil)
-					return send(msg.chat_id_, 0, '<i>SuccessfulLy Deleted.</i>')
+					return send(msg.chat_id_, 0, '<i>Successfully Deleted.</i>')
 				elseif text:match('^(!Send) "(.*)" (.*)') then
 					local id, txt = text:match('^!Send "(.*)" (.*)')
 					send(id, 0, txt)
@@ -578,7 +578,7 @@ function tdcli_update_callback(data)
 						from_background_ = 1
 					}, dl_cb, nil)
 				elseif text:match("^(!Guide)$") then
-					local txt = '📍Advertiser Guide📍\n\n!Online\n<i>!Status✔️</i>\n<code>❤️You Must Respond To This Message Even If Your Advertiser Has a Message Limitation❤️</code>\n/reload\n<i>l🔄Reload Bot🔄l</i>\n<code>I⛔️⛔️I</code>\n!Update\n<i> Update The Bot To The Latest Version And Reload🆕</i>\n\n!Admin\n<i>Add a New Admin With a Given ID 🛂</i>\n\n!Administrator\n<i>Add a New Administrator With a Given ID 🛂</i>\n\n<code>(⚠️The Difference Between The Admin & Administrator Is The Granting Of Access To Or Obtaining Of a Managerial Position⚠️)</code>\n\n!Del admin\n<i>Remove Admin Or Administrator Bu ID ✖️</i>\n\n!Leave\n<i>Leave From GP & Delete Info 🏃</i>\n\n!Add contact\n<i>Add Max Contacts & People In Your Private Chat To The Group ➕</i>\n\n!My id\n<i>Get Your ID 🆔</i>\n\n!Say\n<i>Get Text🗣</i>\n\n!Send\n<i>Send The Text To The Given Group Or User ID📤</i>\n\n!Set name\n<i>Set Bot`s Name✏️</i>\n\n!RefreshBot\n<i>Refresh Bot`s Info🎈</i>\n<code>(Used In Cases Such As Setting The Name To Update The Name Of The Advertiser`s Contact)</code>\n\n!Set username\n<i>Replacing The Name With The Current User Name (Limited In a Short Time) 🔄</i>\n\n!Del username\n<i>Delete UserName ❎</i>\n\n!Add number on|off\n<i>Change The Status Of The Subscription Number Of The Advertiser In The Answer To The Shared Number 🔖</i>\n\n!Add PM on|off\n<i>Change The Status Of The Message Sent In The Answer To The Shared Numberℹ️</i>\n\n!Set add contact PM\n<i>Set The Given Text As The Shared Number Answer📨</i>\n\n!Auto reply Block|Private|Group|Super GP|Link|Admin\n<i>Get a List Of Items In The Text File Or Message Format📄</i>\n\n!Block\n<i>Block User With ID From Private Chat 🚫</i>\n\n!Unblock\n<i>Unblock User With Given ID💢</i>\n\n!View state on|off 👁\n<i>Change The Status Of Viewing Messages By The Advertiser (Enable Or Disable The Second Tick)</i>\n\n!Statistic\n<i>Get Bot Statistic📊</i>\n\n!Status\n<i>Get Advertiser Status⚙️</i>\n\n!Refresh\n<i>Refresh States🚀</i>\n<code>🎃Used Max Once a Day🎃</code>\n\n!Send to all|private|group|super gp\n<i>Send The Message To The Requested Items 📩</i>\n<code>(😄We Advise Not To Use All & Private😄)</code>\n\n!Send to sgp\n<i>Send To Super GP ✉️</i>\n<code>(We Recommend You Use & Integrate Commands & Send Them To The Dupport Team)</code>\n\n!Set answer\n<i>Responding To The Answer As An Auto Reply To The Message Entered In Accordance With The Text 📝</i>\n\nحذف جواب متن\n<i>حذف جواب مربوط به متن ✖️</i>\n\nAuto reply on|off\n<i>Change the auto-responder`s response status to the set text 📯</i>\n\n!Add to all\n<i>Add To Super Groups & Groups With ID ➕➕</i>\n\n!Leave ID\n<i>Leave With GP ID 🏃</i>\n\n!Guide\n<i>Get This Message 🆘</i>\n〰〰〰ا〰〰〰\n!Shuffle sync\n<code>Synchronize advertiser information with pre-installed shadow information 🔃</code>'
+					local txt = '📍Advertiser Guide📍\n\n!Online\n<i>!Status✔️</i>\n<code>❤️You Must Respond To This Message Even If Your Advertiser Has a Message Limitation❤️</code>\n/reload\n<i>l🔄Reload Bot🔄l</i>\n<code>I⛔️⛔️I</code>\n!Update\n<i> Update The Bot To The Latest Version And Reload🆕</i>\n\n!Admin\n<i>Add a New Admin With a Given ID 🛂</i>\n\n!Administrator\n<i>Add a New Administrator With a Given ID 🛂</i>\n\n<code>(⚠️The Difference Between The Admin & Administrator Is The Granting Of Access To Or Obtaining Of a Managerial Position⚠️)</code>\n\n!Del admin\n<i>Remove Admin Or Administrator Bu ID ✖️</i>\n\n!Leave\n<i>Leave From GP & Delete Info 🏃</i>\n\n!Add contact\n<i>Add Max Contacts & People In Your Private Chat To The Group ➕</i>\n\n!My id\n<i>Get Your ID 🆔</i>\n\n!Say\n<i>Get Text🗣</i>\n\n!Send\n<i>Send The Text To The Given Group Or User ID📤</i>\n\n!Set name\n<i>Set Bot`s Name✏️</i>\n\n!RefreshBot\n<i>Refresh Bot`s Info🎈</i>\n<code>(Used In Cases Such As Setting The Name To Update The Name Of The Advertiser`s Contact)</code>\n\n!Set username\n<i>Replacing The Name With The Current User Name (Limited In a Short Time) 🔄</i>\n\n!Del username\n<i>Delete UserName ❎</i>\n\n!Add number on|off\n<i>Change The Status Of The Subscription Number Of The Advertiser In The Answer To The Shared Number 🔖</i>\n\n!Add PM on|off\n<i>Change The Status Of The Message Sent In The Answer To The Shared Numberℹ️</i>\n\n!Set add contact PM\n<i>Set The Given Text As The Shared Number Answer📨</i>\n\n!Auto reply Block|Private|Group|Super GP|Link|Admin\n<i>Get a List Of Items In The Text File Or Message Format📄</i>\n\n!Block\n<i>Block User With ID From Private Chat 🚫</i>\n\n!Unblock\n<i>Unblock User With Given ID💢</i>\n\n!View state on|off 👁\n<i>Change The Status Of Viewing Messages By The Advertiser (Enable Or Disable The Second Tick)</i>\n\n!Statistic\n<i>Get Bot Statistic📊</i>\n\n!Status\n<i>Get Advertiser Status⚙️</i>\n\n!Refresh\n<i>Refresh States🚀</i>\n<code>🎃Used Max Once a Day🎃</code>\n\n!Send to all|private|group|super gp\n<i>Send The Message To The Requested Items 📩</i>\n<code>(😄We Advise Not To Use All & Private😄)</code>\n\n!Send to sgp\n<i>Send To Super GP ✉️</i>\n<code>(We Recommend You Use & Integrate Commands & Send Them To The Dupport Team)</code>\n\n!Set answer\n<i>Responding To The Answer As An Auto Reply To The Message Entered In Accordance With The Text 📝</i>\n\n!Del answer\n<i>Delete the answer to the text✖️</i>\n\nAuto reply on|off\n<i>Change the auto-responder`s response status to the set text 📯</i>\n\n!Add to all\n<i>Add To Super Groups & Groups With ID ➕➕</i>\n\n!Leave ID\n<i>Leave With GP ID 🏃</i>\n\n!Guide\n<i>Get This Message 🆘</i>\n〰〰〰ا〰〰〰\n!Shuffle sync\n<code>Synchronize advertiser information with pre-installed shadow information 🔃</code>'
 					return send(msg.chat_id_,msg.id_, txt)
 				elseif tostring(msg.chat_id_):match("^-") then
 					if text:match("^(!Leave ID)$") then
